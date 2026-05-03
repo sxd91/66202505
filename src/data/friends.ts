@@ -84,6 +84,14 @@ export const friendsData: FriendItem[] = [
 		siteurl: "https://gp.qq.com/cp/a20190617version/cg9pc.html",
 		tags: ["Docs", "download"],
 	},
+	{
+		id: 9,
+		title: "我的世界",
+		imgurl: "https://img.onlinedown.net/download/202106/140625-60c1abe14bee1.jpg",
+		desc: "我的世界",
+		siteurl: "https://eaglercraft.ir/zh/#features",
+		tags: ["Docs", "online game"],
+	},
 ];
 
 // 获取所有友情链接数据
