@@ -76,6 +76,14 @@ export const friendsData: FriendItem[] = [
 		siteurl: "https://developer.mozilla.org",
 		tags: ["Docs", "Reference"],
 	},
+	{
+		id: 9,
+		title: "和平精英",
+		imgurl: "https://game.gtimg.cn/images/gp/public/logo.png",
+		desc: "和平精英",
+		siteurl: "https://gp.qq.com/cp/a20190617version/cg9pc.html",
+		tags: ["Docs", "download"],
+	},
 ];
 
 // 获取所有友情链接数据
