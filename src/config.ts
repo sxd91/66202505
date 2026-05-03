@@ -19,12 +19,20 @@ import { LinkPreset } from "./types/config";
 // 移除i18n导入以避免循环依赖
 
 // 定义站点语言
+<<<<<<< HEAD
 const SITE_LANG = "zh_CN"; // 语言代码，例如：'en', 'zh_CN', 'ja' 等。
+=======
+const SITE_LANG = "ja"; // 语言代码，例如：'en', 'zh_CN', 'ja' 等。
+>>>>>>> 9e2d76064b985efb5113a50d5c503d5aaaf74f23
 const SITE_TIMEZONE = 8; //设置你的网站时区 from -12 to 12 default in UTC+8
 export const siteConfig: SiteConfig = {
 	title: "毕业相册",
 	subtitle: "devlog",
+<<<<<<< HEAD
 	siteURL: "https://6615.pages.dev/", // 请替换为你的站点URL，以斜杠结尾
+=======
+	siteURL: "https://mizuki.mysqil.com/", // 请替换为你的站点URL，以斜杠结尾
+>>>>>>> 9e2d76064b985efb5113a50d5c503d5aaaf74f23
 	siteStartDate: "2025-09-01", // 站点开始运行日期，用于站点统计组件计算运行天数
 
 	timeZone: SITE_TIMEZONE,
@@ -45,7 +53,11 @@ export const siteConfig: SiteConfig = {
 		skills: false, // 技能页面开关
 		timeline: false, // 时间线页面开关
 		albums: true, // 相册页面开关
+<<<<<<< HEAD
 		devices: true, // 设备页面开关
+=======
+		devices: false, // 设备页面开关
+>>>>>>> 9e2d76064b985efb5113a50d5c503d5aaaf74f23
 	},
 
 	// 顶栏标题配置
@@ -80,7 +92,11 @@ export const siteConfig: SiteConfig = {
 	},
 
 	anime: {
+<<<<<<< HEAD
 		mode: "bilibili", // 番剧页面模式："bangumi" 使用Bangumi API，"local" 使用本地配置，"bilibili" 使用Bilibili API
+=======
+		mode: "local", // 番剧页面模式："bangumi" 使用Bangumi API，"local" 使用本地配置，"bilibili" 使用Bilibili API
+>>>>>>> 9e2d76064b985efb5113a50d5c503d5aaaf74f23
 	},
 
 	// 文章列表布局配置
@@ -188,7 +204,11 @@ export const siteConfig: SiteConfig = {
 		enable: true, // 启用目录功能
 		mode: "sidebar", // 目录显示模式："float" 悬浮按钮模式，"sidebar" 侧边栏模式
 		depth: 2, // 目录深度，1-6，1 表示只显示 h1 标题，2 表示显示 h1 和 h2 标题，依此类推
+<<<<<<< HEAD
 		useJapaneseBadge: false, // 使用日语假名标记（あいうえお...）代替数字，开启后会将 1、2、3... 改为 あ、い、う...
+=======
+		useJapaneseBadge: true, // 使用日语假名标记（あいうえお...）代替数字，开启后会将 1、2、3... 改为 あ、い、う...
+>>>>>>> 9e2d76064b985efb5113a50d5c503d5aaaf74f23
 	},
 	showCoverInContent: true, // 在文章内容页显示文章封面
 	generateOgImages: false, // 启用生成OpenGraph图片功能,注意开启后要渲染很长时间，不建议本地调试的时候开启
@@ -288,6 +308,19 @@ export const navBarConfig: NavBarConfig = {
 			icon: "material-symbols:person",
 			children: [
 				{
+<<<<<<< HEAD
+=======
+					name: "Anime",
+					url: "/anime/",
+					icon: "material-symbols:movie",
+				},
+				{
+					name: "Diary",
+					url: "/diary/",
+					icon: "material-symbols:book",
+				},
+				{
+>>>>>>> 9e2d76064b985efb5113a50d5c503d5aaaf74f23
 					name: "Gallery",
 					url: "/albums/",
 					icon: "material-symbols:photo-library",
@@ -312,19 +345,31 @@ export const navBarConfig: NavBarConfig = {
 			icon: "material-symbols:info",
 			children: [
 				{
+<<<<<<< HEAD
 					name: "关于",
+=======
+					name: "About",
+>>>>>>> 9e2d76064b985efb5113a50d5c503d5aaaf74f23
 					url: "/about/",
 					icon: "material-symbols:person",
 				},
 				{
+<<<<<<< HEAD
 					name: "友链",
+=======
+					name: "Friends",
+>>>>>>> 9e2d76064b985efb5113a50d5c503d5aaaf74f23
 					url: "/friends/",
 					icon: "material-symbols:group",
 				},
 			],
 		},
 		{
+<<<<<<< HEAD
 			name: "其他",
+=======
+			name: "Others",
+>>>>>>> 9e2d76064b985efb5113a50d5c503d5aaaf74f23
 			url: "#",
 			icon: "material-symbols:more-horiz",
 			children: [
@@ -411,7 +456,11 @@ export const expressiveCodeConfig: ExpressiveCodeConfig = {
 };
 
 export const commentConfig: CommentConfig = {
+<<<<<<< HEAD
 	enable: false, // 启用评论功能。当设置为 false 时，评论组件将不会显示在文章区域。
+=======
+	enable: true, // 启用评论功能。当设置为 false 时，评论组件将不会显示在文章区域。
+>>>>>>> 9e2d76064b985efb5113a50d5c503d5aaaf74f23
 	twikoo: {
 		envId: "https://twikoo.vercel.app",
 		lang: SITE_LANG,
