@@ -18,12 +18,11 @@ export type DeviceCategory = {
 export const devicesData: DeviceCategory = {
 	OnePlus: [
 		{
-			name: "OnePlus 13T",
-			image: "/images/device/oneplus13t.png",
-			specs: "Gray / 16G + 1TB",
-			description:
-				"Flagship performance, Hasselblad imaging, 80W SuperVOOC.",
-			link: "https://www.oneplus.com/cn/13t",
+			name: "Redmi turbo4 Pro",
+			image: "https://cdn.cnbj1.fds.api.mi-img.com/product-images/redmiTrubo4Pro/images/14932.png",
+			specs: "black / 12G + 512GB",
+			description: "呼吸灯, 7500MA battery, 90W SuperVOOC.",
+			link: "https://www.mi.com/prod/redmi-turbo-4-pro",
 		},
 	],
 	Router: [
