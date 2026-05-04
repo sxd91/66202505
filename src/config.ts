@@ -579,22 +579,29 @@ export const sakuraConfig: SakuraConfig = {
 	zIndex: 100, // 层级，确保樱花在合适的层级显示
 };
 
-// Pio 看板娘配置
 export const pioConfig: import("./types/config").PioConfig = {
-	enable: true, // 启用看板娘
-	models: ["/pio/models/pio/model.json"], // 默认模型路径
-	position: "left", // 模型位置
-	width: 280, // 默认宽度
-	height: 250, // 默认高度
-	mode: "draggable", // 默认为可拖拽模式
-	hiddenOnMobile: false, // 默认在移动设备上隐藏
+	enable: true,
+	models: [
+		"/pio/models/pio/default-model.json", // 默认服装
+		"/pio/models/pio/pajamas-model.json", // 睡衣
+		"/pio/models/pio/school-model.json", // 校服
+	],
+	position: "left",
+	width: 280,
+	height: 250,
+	mode: "draggable",
+	hiddenOnMobile: false,
+	tips: true, // 启用智能时间问候
+	night: true, // 启用夜间模式
 	dialog: {
-		welcome: "Welcome to 重庆66中2028届五班 Website!", // 欢迎词
-		touch: ["干嘛~", "别拉我了~", "别搞~", "何意味。"], // 触摸提示
-		home: "别摸我看看其他的吧！", // 首页提示
-		skin: ["想不想看我的新衣服?", "换不换一件衣服？"], // 换装提示
-		close: "QWQ 下次再见~", // 关闭提示
-		link: "https://github.com/matsuzaka-yuki/Mizuki", // 关于链接
+		welcome: "Welcome to 重庆66中2028届五班 Website!",
+		touch: ["干嘛~", "别拉我了~", "别搞~", "何意味。"],
+		home: "别摸我看看其他的吧！",
+		skin: ["想不想看我的新衣服?", "换不换一件衣服？"],
+		close: "QWQ 下次再见~",
+		link: "https://github.com/matsuzaka-yuki/Mizuki",
+		referer: "欢迎来自 %t 的朋友！",
+		info: "关于这个可爱的看板娘~",
 	},
 };
 

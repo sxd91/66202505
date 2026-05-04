@@ -441,6 +441,8 @@ export type PioConfig = {
 	height?: number; // 看板娘高度
 	mode?: "static" | "fixed" | "draggable"; // 展现模式
 	hiddenOnMobile?: boolean; // 是否在移动设备上隐藏
+	tips?: boolean; // 启用智能时间问候
+	night?: boolean; // 启用夜间模式
 	dialog?: {
 		welcome?: string | string[]; // 欢迎词
 		touch?: string | string[]; // 触摸提示
@@ -448,6 +450,8 @@ export type PioConfig = {
 		skin?: [string, string]; // 换装提示 [切换前, 切换后]
 		close?: string; // 关闭提示
 		link?: string; // 关于链接
+		referer?: string; // 来源网站欢迎语
+		info?: string; // 关于信息提示
 		custom?: Array<{
 			selector: string; // CSS选择器
 			type: "read" | "link"; // 类型
