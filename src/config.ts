@@ -402,7 +402,7 @@ export const expressiveCodeConfig: ExpressiveCodeConfig = {
 export const commentConfig: CommentConfig = {
 	enable: true, // 启用评论功能。当设置为 false 时，评论组件将不会显示在文章区域。
 	twikoo: {
-		envId: "dazzling-kashata-95c4e1.netlify.app",
+		envId: "https://dazzling-kashata-95c4e1.netlify.app/.netlify/functions/twikoo",
 		lang: SITE_LANG,
 	},
 };
