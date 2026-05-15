@@ -23,18 +23,34 @@ export const projectsData: Project[] = [
 		id: "66毕业相册",
 		title: "2025届初中1班的毕业相册",
 		description:
-			"一个纪念初中班级的网站",
+			"一个纪念初中班级的网站,可惜的是原github仓库被删了，所以现在只能放个空仓库了",
 		image: "",
 		category: "web",
 		techStack: ["Astro", "TypeScript", "Tailwind CSS", "Svelte"],
 		status: "completed",
 		liveDemo: "https://cn66website.pages.dev/",
-		sourceCode: "https://github.com/sxd91/66202505/", // 更改为GitHub链接
+		sourceCode: "https://github.com/sxd91/cn66website-master/", // 更改为GitHub链接
 		visitUrl: "https://cn66website.pages.dev/", // 添加前往项目链接
 		startDate: "2025-01-01",
 		endDate: "2025-06-01",
 		featured: true,
 		tags: ["66", "毕业相册"],
+	},
+	{
+		id: "66毕业相册2",
+		title: "2025届高中5班的毕业相册",
+		description: "一个纪念高中班级的网站",
+		image: "",
+		category: "web",
+		techStack: ["Astro", "TypeScript", "Tailwind CSS", "Svelte"],
+		status: "completed",
+		liveDemo: "https://6615.pages.dev/",
+		sourceCode: "https://github.com/sxd91/66202505/", // 更改为GitHub链接
+		visitUrl: "https://6615.pages.dev/", // 添加前往项目链接
+		startDate: "2025-01-01",
+		endDate: "2025-06-01",
+		featured: false,
+		tags: ["66", "相册"],
 	},
 ];
 
