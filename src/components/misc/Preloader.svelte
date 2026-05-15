@@ -8,6 +8,18 @@
   let isFirstVisit = false;
   let isComplete = false;
 
+  const skipPreload = () => {
+    progress = 100;
+    statusText = '正在进入...';
+    isComplete = true;
+    
+    setTimeout(() => {
+      isVisible = false;
+      localStorage.setItem('hasVisited', 'true');
+      document.dispatchEvent(new Event('preloader:complete'));
+    }, 300);
+  };
+
   onMount(async () => {
     const hasVisited = localStorage.getItem('hasVisited');
     isFirstVisit = !hasVisited;
@@ -23,15 +35,17 @@
       try {
         await pagePreloader.start();
       } catch {} finally {
-        progress = 100;
-        statusText = '加载完成';
-        isComplete = true;
-        
-        setTimeout(() => {
-          isVisible = false;
-          localStorage.setItem('hasVisited', 'true');
-          document.dispatchEvent(new Event('preloader:complete'));
-        }, 600);
+        if (!isComplete) {
+          progress = 100;
+          statusText = '加载完成';
+          isComplete = true;
+          
+          setTimeout(() => {
+            isVisible = false;
+            localStorage.setItem('hasVisited', 'true');
+            document.dispatchEvent(new Event('preloader:complete'));
+          }, 600);
+        }
       }
     }
   });
@@ -53,6 +67,10 @@
       </div>
       
       <p class="preloader-status">{statusText}</p>
+      
+      <button class="preloader-skip-btn" on:click={skipPreload}>
+        跳过预加载
+      </button>
     </div>
   </div>
 {/if}
@@ -160,9 +178,33 @@
     margin: 0;
   }
 
+  .preloader-skip-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.8);
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+  }
+
+  .preloader-skip-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+    color: #fff;
+    transform: scale(1.05);
+  }
+
+  .preloader-skip-btn:active {
+    transform: scale(0.98);
+  }
+
   @media (max-width: 768px) {
     .preloader-progress-wrapper { width: 220px; }
     .preloader-logo { width: 60px; height: 60px; }
     .logo-center { width: 30px; height: 30px; }
+    .preloader-skip-btn { padding: 0.4rem 1.2rem; font-size: 0.75rem; }
   }
 </style>
