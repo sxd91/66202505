@@ -32,7 +32,7 @@ if (!album) {
 ---
 
 <MainGridLayout title={album.title} description={album.description || album.title}>
-  <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
+  <div class="w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
     <div class="card-base z-10 px-9 py-6 relative w-full">
       
       <!-- 返回按钮 -->
@@ -88,28 +88,42 @@ if (!album) {
 
       <!-- 照片网格 -->
       <div 
-        class={`photo-gallery ${album.layout === 'masonry' ? 'masonry-layout' : 'grid-layout'}`}
-        data-layout={album.layout || 'grid'}
-        data-columns={album.columns || 3}
+        class="photo-gallery"
+        style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; width: 100%;"
       >
-        {album.photos.map((photo: Photo, _index: number) => (
-          <figure class="photo-item group relative overflow-hidden rounded-lg">
-            <a 
-              href="javascript:void(0)"
-              data-src={photo.src}
-              data-fancybox={`gallery-${_index}`}
-              class="block"
+        {album.photos.map((photo: Photo, index: number) => {
+          const thumbnail = photo.thumbnail || `/images/albums/${album.id}/${photo.src.split('/').pop()?.replace(/\.[^.]+$/, '_thumb.jpg') || ''}`;
+          return (
+            <figure 
+              class="photo-item group relative overflow-hidden rounded-lg"
+              data-index={index}
             >
-              <img 
-                src={photo.src}
-                alt={photo.alt}
-                class="photo-image w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer"
-                loading="lazy"
-                onload="this.removeAttribute('loading')"
-              />
-            </a>
-          </figure>
-        ))}
+              <a 
+                href="javascript:void(0)"
+                data-src={photo.src}
+                data-fancybox={`gallery-${album.id}`}
+                class="block photo-link"
+                data-caption={photo.title || photo.alt}
+              >
+                <div class="photo-placeholder bg-neutral-100 dark:bg-neutral-800 relative overflow-hidden">
+                  <img 
+                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Crect fill='%23f3f4f6' width='1' height='1'/%3E%3C/svg%3E"
+                    data-src={photo.thumbnail || photo.src}
+                    data-full-src={photo.src}
+                    alt={photo.alt}
+                    class="photo-image w-full h-full object-cover lazy-image"
+                    loading="lazy"
+                  />
+                  <div class="loading-overlay absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <svg class="w-6 h-6 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
+                    </svg>
+                  </div>
+                </div>
+              </a>
+            </figure>
+          );
+        })}
       </div>
     </div>
   </div>
@@ -117,67 +131,227 @@ if (!album) {
 </MainGridLayout>
 
 <script>
-  // 确保Fancybox正确处理相册图片
-  document.addEventListener('DOMContentLoaded', () => {
-    console.log('=== 相册页面加载完成 ===');
-    
-    // 检查页面中的图片元素
-    const albumImages = document.querySelectorAll('.moment-images img, .photo-gallery img');
-    console.log('相册图片数量:', albumImages.length);
-    
-    // 预加载图片以确保正确显示
-    albumImages.forEach((img) => {
-      if (img instanceof HTMLImageElement) {
-        const preloadImg = new Image();
-        preloadImg.src = img.src;
+  class PhotoGalleryOptimizer {
+    private imagesLoaded: number = 0;
+    private totalImages: number = 0;
+    private observer: IntersectionObserver | null = null;
+
+    constructor() {
+      this.init();
+    }
+
+    init() {
+      this.totalImages = document.querySelectorAll('.lazy-image').length;
+      this.setupLazyLoading();
+      this.optimizeLayout();
+    }
+
+    setupLazyLoading() {
+      this.observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            this.loadImage(img);
+            observer.unobserve(img);
+          }
+        });
+      }, {
+        rootMargin: '150px',
+        threshold: 0.1
+      });
+
+      if (this.observer) {
+        document.querySelectorAll('.lazy-image').forEach(img => {
+          this.observer!.observe(img);
+        });
       }
+    }
+
+    loadImage(img) {
+      const src = img.getAttribute('data-src');
+      const fullSrc = img.getAttribute('data-full-src');
+      
+      const tempImg = new Image();
+      tempImg.onload = () => {
+        img.src = src;
+        img.classList.add('image-loaded');
+        
+        if (fullSrc && fullSrc !== src) {
+          const fullImg = new Image();
+          fullImg.onload = () => {
+            img.src = fullSrc;
+          };
+          fullImg.src = fullSrc;
+        }
+        
+        this.imagesLoaded++;
+      };
+      tempImg.onerror = () => {
+        img.src = fullSrc || src;
+        img.classList.add('image-loaded');
+        this.imagesLoaded++;
+      };
+      tempImg.src = src;
+    }
+
+    optimizeLayout() {
+      const gallery = document.querySelector('.photo-gallery');
+      if (gallery) {
+        gallery.classList.add('layout-stable');
+      }
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      new PhotoGalleryOptimizer();
     });
-  });
+  } else {
+    new PhotoGalleryOptimizer();
+  }
 </script>
 
 <style>
-  .grid-layout {
-    display: grid;
+  .photo-gallery {
+    display: grid !important;
     gap: 1rem;
+    grid-template-columns: repeat(3, 1fr) !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
-  
-  .grid-layout[data-columns="2"] {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+  .photo-gallery.grid-layout {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
   }
-  
-  .grid-layout[data-columns="3"] {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+  .photo-gallery.grid-layout[data-columns="2"] {
+    grid-template-columns: repeat(2, 1fr) !important;
   }
-  
-  .grid-layout[data-columns="4"] {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+  .photo-gallery.grid-layout[data-columns="3"] {
+    grid-template-columns: repeat(3, 1fr) !important;
   }
-  
-  .masonry-layout {
-    columns: 2;
+
+  .photo-gallery.grid-layout[data-columns="4"] {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+
+  .photo-gallery.masonry-layout {
+    display: block !important;
+    columns: 3;
     column-gap: 1rem;
+    column-fill: auto;
   }
-  
+
   @media (min-width: 768px) {
-    .masonry-layout {
+    .photo-gallery {
+      grid-template-columns: repeat(3, 1fr) !important;
+    }
+    
+    .photo-gallery.grid-layout[data-columns="2"] {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+    
+    .photo-gallery.grid-layout[data-columns="3"] {
+      grid-template-columns: repeat(3, 1fr) !important;
+    }
+    
+    .photo-gallery.grid-layout[data-columns="4"] {
+      grid-template-columns: repeat(4, 1fr) !important;
+    }
+    
+    .photo-gallery.masonry-layout {
       columns: 3;
     }
   }
-  
+
   @media (min-width: 1024px) {
-    .masonry-layout[data-columns="4"] {
+    .photo-gallery {
+      grid-template-columns: repeat(3, 1fr) !important;
+    }
+    
+    .photo-gallery.grid-layout[data-columns="4"] {
+      grid-template-columns: repeat(4, 1fr) !important;
+    }
+    
+    .photo-gallery.masonry-layout[data-columns="4"] {
       columns: 4;
     }
   }
-  
-  .masonry-layout .photo-item {
+
+  @media (max-width: 767px) {
+    .photo-gallery {
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 0.5rem !important;
+    }
+    
+    .photo-gallery.grid-layout {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+    
+    .photo-gallery.masonry-layout {
+      columns: 2;
+      column-gap: 0.5rem;
+    }
+  }
+
+  .photo-gallery .photo-item {
     break-inside: avoid;
     margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeIn 0.3s ease forwards;
   }
-  
-  .grid-layout .photo-container {
+
+  @media (max-width: 767px) {
+    .photo-gallery .photo-item {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .photo-gallery.grid-layout .photo-item {
     aspect-ratio: 1;
   }
-  
-</style>
 
+  .photo-item:nth-child(4n+1) { animation-delay: 0ms; }
+  .photo-item:nth-child(4n+2) { animation-delay: 50ms; }
+  .photo-item:nth-child(4n+3) { animation-delay: 100ms; }
+  .photo-item:nth-child(4n+4) { animation-delay: 150ms; }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .photo-placeholder {
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  }
+
+  .photo-image {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .photo-image.image-loaded {
+    opacity: 1;
+  }
+
+  .photo-image:not(.image-loaded) {
+    opacity: 0.7;
+    filter: blur(3px);
+  }
+
+  .photo-link:hover .photo-image {
+    transform: scale(1.05);
+  }
+
+  .layout-stable {
+    contain: layout style paint;
+  }
+</style>
