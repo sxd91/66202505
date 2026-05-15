@@ -129,37 +129,40 @@
     pointer-events: auto;
   }
 
-  /* 按钮容器优化 */
+  /* 按钮容器优化 - 2×2网格排列，避免遮挡看板娘 */
   .pio-container .pio-action {
     top: 1em;
-    right: 0.5em;
     opacity: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 0.3em;
+    width: fit-content;
   }
 
-  /* 按钮大小优化 */
+  /* 按钮大小优化 - 适配手机屏幕 */
   .pio-action span {
-    width: 2.5em;
-    height: 2.5em;
+    width: 1.6em;
+    height: 1.6em;
     margin-bottom: 0.3em;
-    font-size: 0.8em;
+    font-size: 0.85em;
     border-radius: 50%;
-    background-size: 60%;
-    border: 2px solid rgba(102, 102, 102, 0.3);
+    background-size: 65%;
+    border: 1px solid rgba(102, 102, 102, 0.4);
   }
 
   /* 确保按钮不会超出屏幕 */
   .pio-container.left .pio-action {
-    right: 0.5em;
-    left: auto;
+    left: calc(100% + 0.5em);
+    right: auto;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   .pio-container.right .pio-action {
-    left: 0.5em;
-    right: auto;
+    right: calc(100% + 0.5em);
+    left: auto;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   /* 手机端悬停效果移除 */
