@@ -115,20 +115,23 @@ export const siteConfig: SiteConfig = {
 		// 支持单张图片或图片数组，当数组长度 > 1 时自动启用轮播
 		src: {
 			desktop: [
-				"/assets/desktop-banner/1.webp",
-				"/assets/desktop-banner/2.webp",
-				"/assets/desktop-banner/3.webp",
-				"/assets/desktop-banner/4.webp",
-				"/assets/desktop-banner/5.webp",
-				"/assets/desktop-banner/6.webp",
+				"/assets/desktop-banner/1.jpg",
+				"/assets/desktop-banner/2.jpg",
+				"/assets/desktop-banner/3.jpg",
+				"/assets/desktop-banner/4.png",
+				"/assets/desktop-banner/5.jpg",
+				"/assets/desktop-banner/6.jpg",
+				"/assets/desktop-banner/7.jpg",
 			], // 桌面横幅图片
 			mobile: [
-				"/assets/mobile-banner/1.webp",
-				"/assets/mobile-banner/2.webp",
-				"/assets/mobile-banner/3.webp",
-				"/assets/mobile-banner/4.webp",
-				"/assets/mobile-banner/5.webp",
-				"/assets/mobile-banner/6.webp",
+				"/assets/mobile-banner/1.jpg",
+				"/assets/mobile-banner/2.jpg",
+				"/assets/mobile-banner/3.jpg",
+				"/assets/mobile-banner/4.png",
+				"/assets/mobile-banner/5.jpg",
+				"/assets/mobile-banner/6.jpg",
+				"/assets/mobile-banner/7.jpg",
+				"/assets/mobile-banner/8.jpg",
 			], // 移动横幅图片
 		}, // 使用本地横幅图片
 
@@ -141,7 +144,7 @@ export const siteConfig: SiteConfig = {
 
 		waves: {
 			enable: true, // 是否启用水波纹效果（注意：此功能性能开销较大）
-			performanceMode: false, // 性能模式：减少动画复杂度(性能提升40%)
+			performanceMode: true, // 性能模式：减少动画复杂度(性能提升40%)
 			mobileDisable: false, // 移动端禁用
 		},
 
@@ -265,7 +268,7 @@ export const navBarConfig: NavBarConfig = {
 			children: [
 				{
 					name: "GitHub",
-					url: "https://github.xyz/sxdhhh114514",
+					url: "https://github.com/sxd91",
 					external: true,
 					icon: "fa6-brands:github",
 				},
@@ -274,12 +277,6 @@ export const navBarConfig: NavBarConfig = {
 					url: "https://space.bilibili.com/1537249820",
 					external: true,
 					icon: "fa6-brands:bilibili",
-				},
-				{
-					name: "Gitee",
-					url: "https://gitee.com/matsuzakayuki/Mizuki",
-					external: false,
-					icon: "mdi:git",
 				},
 			],
 		},
@@ -354,7 +351,7 @@ export const profileConfig: ProfileConfig = {
 		{
 			name: "GitHub",
 			icon: "fa6-brands:github",
-			url: "https://bgithub.xyz/sxdhhh114514",
+			url: "https://github.com/sxd91",
 		},
 	],
 };
@@ -599,7 +596,7 @@ export const pioConfig: import("./types/config").PioConfig = {
 		home: "别摸我看看其他的吧！",
 		skin: ["想不想看我的新衣服?", "换不换一件衣服？"],
 		close: "QWQ 下次再见~",
-		link: "https://github.com/matsuzaka-yuki/Mizuki",
+		link: "https://github.com/sxd91/66202505/",
 		referer: "欢迎来自 %t 的朋友！",
 		info: "关于这个可爱的看板娘~",
 	},

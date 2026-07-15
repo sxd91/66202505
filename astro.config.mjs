@@ -26,7 +26,7 @@ import { parseDirectiveNode } from "./src/plugins/remark-directive-rehype.js";
 import { remarkMermaid } from "./src/plugins/remark-mermaid.js";
 import { remarkContent } from "./src/plugins/remark-content.mjs";
 import { rehypeImageWidth } from "./src/plugins/rehype-image-width.mjs";
-
+import { umami } from "oddmisc";
 // https://astro.build/config
 export default defineConfig({
 	site: siteConfig.siteURL,
@@ -38,6 +38,10 @@ export default defineConfig({
 	integrations: [
 		tailwind({
 			nesting: true,
+		}),
+		umami({
+			shareUrl:
+				"https://cloud.umami.is/analytics/us/share/Vm1J7iWrHyA3H5ff", // Umami 分享链接（见下方说明）如设置为 false 则禁用组件的umami访问量信息显示,不影响umami统计
 		}),
 		swup({
 			theme: false,
