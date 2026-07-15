@@ -265,7 +265,7 @@ export const navBarConfig: NavBarConfig = {
 			children: [
 				{
 					name: "GitHub",
-					url: "https://github.xyz/sxdhhh114514",
+					url: "https://github.com/sxd91",
 					external: true,
 					icon: "fa6-brands:github",
 				},
@@ -274,12 +274,6 @@ export const navBarConfig: NavBarConfig = {
 					url: "https://space.bilibili.com/1537249820",
 					external: true,
 					icon: "fa6-brands:bilibili",
-				},
-				{
-					name: "Gitee",
-					url: "https://gitee.com/matsuzakayuki/Mizuki",
-					external: false,
-					icon: "mdi:git",
 				},
 			],
 		},
@@ -354,7 +348,7 @@ export const profileConfig: ProfileConfig = {
 		{
 			name: "GitHub",
 			icon: "fa6-brands:github",
-			url: "https://bgithub.xyz/sxdhhh114514",
+			url: "https://github.com/sxd91",
 		},
 	],
 };
@@ -599,7 +593,7 @@ export const pioConfig: import("./types/config").PioConfig = {
 		home: "别摸我看看其他的吧！",
 		skin: ["想不想看我的新衣服?", "换不换一件衣服？"],
 		close: "QWQ 下次再见~",
-		link: "https://github.com/matsuzaka-yuki/Mizuki",
+		link: "https://github.com/sxd91/66202505/",
 		referer: "欢迎来自 %t 的朋友！",
 		info: "关于这个可爱的看板娘~",
 	},
