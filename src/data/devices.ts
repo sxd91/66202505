@@ -16,13 +16,20 @@ export type DeviceCategory = {
 };
 
 export const devicesData: DeviceCategory = {
-	OnePlus: [
+	redmi: [
 		{
 			name: "Redmi turbo4 Pro",
 			image: "https://cdn.cnbj1.fds.api.mi-img.com/product-images/redmiTrubo4Pro/images/14932.png",
 			specs: "black / 12G + 512GB",
 			description: "呼吸灯, 7500MA battery, 90W SuperVOOC.",
 			link: "https://www.mi.com/prod/redmi-turbo-4-pro",
+		},
+		{
+			name: "Redmi watch6",
+			image: "https://cdn.cnbj1.fds.api.mi-img.com/product-images/new-product-images/redmi-watch-6_57896/images/27.png",
+			specs: "black",
+			description: "长续航, 大屏, BES27101BP，强大的第三方社区ASTROBX。",
+			link: "https://www.mi.com/prod/redmi-watch-6",
 		},
 	],
 	Router: [
