@@ -21,7 +21,8 @@ export const devicesData: DeviceCategory = {
 			name: "Redmi turbo4 Pro",
 			image: "https://cdn.cnbj1.fds.api.mi-img.com/product-images/redmiTrubo4Pro/images/14932.png",
 			specs: "black / 12G + 512GB",
-			description: "呼吸灯, 7500MA battery, 90W SuperVOOC.",
+			description:
+				"呼吸灯, 7500MA battery, 90W SuperVOOC，unlockbootloader, root, custom rom.",
 			link: "https://www.mi.com/prod/redmi-turbo-4-pro",
 		},
 		{
